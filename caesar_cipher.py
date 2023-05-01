@@ -41,4 +41,4 @@ def caesar(direction, text, shift):
     return message
 
 result = caesar(direction, text, shift)
-print(f"{text} encoded with shift of {shift} becomes {result}.")
+print(f"{text} {direction}d with shift of {shift} becomes {result}.")
