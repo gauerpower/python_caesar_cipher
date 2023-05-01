@@ -22,35 +22,23 @@ while shift > 25 or shift < 1:
     print("Invalid input. Please enter an integer between 1 and 25.")
     shift = get_shift()
 
-def encrypt(text, shift):
-    encrypted_message = ''
+def caesar(direction, text, shift):
+    message = ''
     for letter in text:
         if letter.isspace():
-            encrypted_message += ' '
+            message += ' '
         else:
             original_index = alphabet.index(letter)
-            new_index = original_index + shift
-            if new_index > 25:
-                new_index -= 26
-            encrypted_message += alphabet[new_index]
-    return encrypted_message
+            if direction == 'encode':
+                new_index = original_index + shift
+                if new_index > 25:
+                    new_index -= 26
+            else:
+                new_index = original_index - shift
+                if new_index < 0:
+                    new_index += 26
+            message += alphabet[new_index]
+    return message
 
-def decrypt(text, shift):
-    decrypted_message = ''
-    for letter in text:
-        if letter.isspace():
-            decrypted_message += ' '
-        else:
-            original_index = alphabet.index(letter)
-            new_index = original_index - shift
-            if new_index < 0:
-                new_index += 26
-            decrypted_message += alphabet[new_index]
-    return decrypted_message
-
-if direction == "encode":
-    result = encrypt(text, shift)
-    print(f"{text} encoded with shift of {shift} becomes {result}.")
-else:
-    result = decrypt(text, shift)
-    print(f"{text} decoded with shift of {shift} becomes {result}.")
+result = caesar(direction, text, shift)
+print(f"{text} encoded with shift of {shift} becomes {result}.")
